@@ -1,10 +1,9 @@
-import React, {useEffect} from 'react';
+import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import { Pie } from '@ant-design/plots';
-import '../styles/Pie.css'
+import '../styles/Pie.css';
 
-const DemoPie = () => {
-
+const DemoPie = ({ lineItems }) => {
   const config = {
     data: [
       { type: 'Dylan', value: 27 },
@@ -30,11 +29,10 @@ const DemoPie = () => {
     },
   };
   return (
-    <div className="pie-container" style={{height: '75%', marginLeft: '75px', marginTop: '25px'}}>
-       <Pie {...config} />
+    <div className="pie-container" style={{ height: '75%', marginLeft: '75px', marginTop: '25px' }}>
+      <Pie {...config} />
     </div>
-   
-  )
+  );
 };
 
 export default DemoPie;
