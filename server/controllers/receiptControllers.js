@@ -17,7 +17,7 @@ const receiptController = {
 
   options.body = form;
 
-    const response = await fetch('https://api.taggun.io/api/receipt/v1/simple/file', options)
+    const response = await fetch('https://api.taggun.io/api/receipt/v1/simple/file', options);
     const parsedData = await response.json();
     const productArray = parsedData.entities.productLineItems;
       // for each element in ProductArray
@@ -25,7 +25,7 @@ const receiptController = {
           // data.name.data
         // extract price
           // data.totalPrice.data
-    console.log(productArray)
+    console.log(productArray);
     res.locals.array = productArray;
     return next();
   } catch (err) {
