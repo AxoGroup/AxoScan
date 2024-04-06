@@ -10,3 +10,7 @@ router.use(
         origin: 'http://localhost:5173'
     })
 )
+
+
+// post request
+// get 
