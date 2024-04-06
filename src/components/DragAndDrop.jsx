@@ -22,7 +22,7 @@ const props = {
     console.log('Dropped files', e.dataTransfer.files);
   },
 };
-const App = () => (
+const App = ({setHasUploaded}) => (
   <Dragger {...props} id="drag-and-drop">
     <p className="ant-upload-drag-icon">
       <InboxOutlined style={{ color: '#f19cbb' }} />
