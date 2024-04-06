@@ -7,12 +7,15 @@
     "start": "node server/server.js",
     "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
     "dev:backend": "nodemon server/server.js",
-    "dev:frontend": "cd client && npm run dev",
+    "dev:frontend": "vite",
     "build": "vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
+    "@ant-design/charts": "^2.0.3",
+    "@ant-design/icons": "^5.3.6",
+    "antd": "^5.16.1",
     "concurrently": "^8.2.2",
     "cors": "git+https://github.com/expressjs/cors.git",
     "express": "^4.19.2",
