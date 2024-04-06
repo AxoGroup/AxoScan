@@ -1,0 +1,11 @@
+#root > div > span > div.css-dev-only-do-not-override-1kuana8.ant-upload.ant-upload-drag:hover {
+  border-color: '#93d5a2' !important;
+}
+
+#root > div > span > div.css-dev-only-do-not-override-1kuana8.ant-upload.ant-upload-drag > span:hover {
+  border-color: '#93d5a2' !important;
+}
+
+#root > div > span > div.css-dev-only-do-not-override-1kuana8.ant-upload.ant-upload-drag > span > div:hover {
+  border-color: '#93d5a2' !important;
+}

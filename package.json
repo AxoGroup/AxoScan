@@ -13,6 +13,8 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
+    "@ant-design/icons": "^5.3.6",
+    "antd": "^5.16.1",
     "concurrently": "^8.2.2",
     "cors": "git+https://github.com/expressjs/cors.git",
     "express": "^4.19.2",

@@ -1,0 +1,8 @@
+#root > div > div:nth-child(4) > div {
+  width: 100%;
+  max-height: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  justify-content: space-between;
+}
