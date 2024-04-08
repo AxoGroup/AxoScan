@@ -6,7 +6,7 @@ const app = express();
 const PORT = 3000;
 
 // delcare routers
-import uploadRouter from './routes/authRoutes';
+import uploadRouter from './routes/authRoutes.js';
 
 // handle parsing request body
 app.use(express.json());

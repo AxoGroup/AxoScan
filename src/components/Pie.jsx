@@ -5,13 +5,7 @@ import '../styles/Pie.css';
 
 const DemoPie = ({ lineItems }) => {
   const config = {
-    data: [
-      { type: 'Dylan', value: 27 },
-      { type: 'Aiden', value: 25 },
-      { type: 'Sofia', value: 18 },
-      { type: 'Austin', value: 15 },
-      { type: 'Sean', value: 10 },
-    ],
+    data: lineItems,
     angleField: 'value',
     colorField: 'type',
     label: {

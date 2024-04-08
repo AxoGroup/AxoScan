@@ -4,9 +4,11 @@ import { message, Upload } from 'antd';
 import '../styles/DragAndDrop.css';
 import axios from 'axios';
 const { Dragger } = Upload;
+import ProgressBar from './ProgressBar'
 
 const DragAndDrop = ({ setHasUploaded, setLineItems }) => {
   const [fileList, setFileList] = useState([]);
+  const [progress, setProgress] = useState(0)
 
   const handleChange = (info) => {
     let fileList = [...info.fileList];
@@ -17,23 +19,22 @@ const DragAndDrop = ({ setHasUploaded, setLineItems }) => {
   const customRequest = async ({ file, onSuccess, onError }) => {
     const formData = new FormData();
     // from taggun
-    formData.append('refresh', 'false');
-    formData.append('incognito', 'false');
-    formData.append('extractTime', 'false');
-    formData.append('extractLineItems', 'true');
     formData.append('file', file);
+    console.log(file)
+    const config = {
+      onUploadProgress: (progressEvent) => {
+        const percentage = ((progressEvent.loaded * 100) / progressEvent.total)
+        setProgress(+percentage.toFixed(2))
+      }
+    }
 
     // update url from backend
     try {
-      const response = await axios.post('/api/upload', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      });
+      const response = await axios.post('/api/upload', formData, config);
       message.success(`${file.name}, file uploaded successfully`);
       console.log('Server Response: ', response.data);
-      if (response.data && response.data.lineItems) {
-        setLineItems(response.data.lineItems);
+      if (response.data) {
+        setLineItems(response.data);
       }
       setHasUploaded(true);
       onSuccess(response.data);
@@ -46,7 +47,8 @@ const DragAndDrop = ({ setHasUploaded, setLineItems }) => {
   };
 
   return (
-    <Dragger name="file" multiple="false" fileList={fileList} onChange={handleChange} customRequest={customRequest} onRemove={() => setFileList([])} id="drag-and-drop">
+    <>
+     <Dragger name="file" multiple={false} fileList={fileList} onChange={handleChange} customRequest={customRequest} onRemove={() => setFileList([])} id="drag-and-drop">
       <p className="ant-upload-drag-icon">
         <InboxOutlined style={{ color: '#f19cbb' }} />
       </p>
@@ -58,6 +60,8 @@ const DragAndDrop = ({ setHasUploaded, setLineItems }) => {
         Support for a single upload. Strictly prohibited from uploading company data or other banned files.
       </p>
     </Dragger>
+    <div className="progress-container">{progress > 0 && <ProgressBar percent={progress} setPercent={setProgress} className="progress-bar" />}</div>
+    </>
   );
 };
 export default DragAndDrop;

@@ -3,8 +3,8 @@ const router = express.Router();
 import cors from 'cors';
 
 // eslint-disable-next-line no-unused-vars
-import receiptController from '../controllers/receiptControllers';
-import searchArray from '../controllers/searchArray';
+import receiptController from '../controllers/receiptControllers.js';
+import searchArray from '../controllers/searchArray.js';
 
 router.use(
     cors({

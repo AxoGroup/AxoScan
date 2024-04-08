@@ -18,19 +18,11 @@ export default function Footer() {
     res.push(<Box key={crypto.randomUUID()} name={names[i]} url={urls[i]} />);
   }
   return (
-    <Card
-      style={{
-        color: 'white',
-        backgroundColor: '#272727',
-        border: 'none',
-        width: '100%',
-        height: '90px',
-        borderRadius: 0,
-      }}>
+    <div id="footer">
       <h2>AxoGroup</h2>
       <h4>Design Team: </h4>
       {res}
-    </Card>
+    </div>
   );
 }
 
