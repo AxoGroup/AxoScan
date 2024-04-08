@@ -3,10 +3,22 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  height: 100%;
+  height: 100vh;
   width: 100%;
 }
 
 .header {
   align-self: flex-start;
+}
+
+.progress-container {
+  position: relative;
+  height: 0;
+}
+
+.progress-bar {
+  position: absolute;
+  bottom: 0; 
+  left: 0;
+  width: 100%;
 }

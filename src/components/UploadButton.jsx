@@ -3,7 +3,7 @@ import { UploadOutlined } from '@ant-design/icons';
 import { Button, message, Upload } from 'antd';
 
 const App = ({ setHasUploaded }) => (
-  <Upload {...props}>
+  <Upload >
     <Button icon={<UploadOutlined />} style={{ marginBottom: '50px' }}>
       Click to Upload
     </Button>

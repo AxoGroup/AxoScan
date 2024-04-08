@@ -6,6 +6,7 @@ import '../styles/Home.css';
 import Footer from './Footer';
 import UploadButton from './UploadButton';
 import Pie from './Pie';
+import ProgressBar from './ProgressBar'
 
 export default function Home() {
   const [hasUploaded, setHasUploaded] = useState(false);
@@ -15,10 +16,10 @@ export default function Home() {
     <div className="home-container">
       <TitleHeader className="header" />
 
-      {!hasUploaded ? (
+      {hasUploaded ? (
         <>
-          <Pie lineItems={lineItems} />
-          <UploadButton setHasUploaded={setHasUploaded} setLineItems={setLineItems} />
+          <Pie  lineItems={lineItems} />
+          <UploadButton style={{marginRight: '10px'}} setHasUploaded={setHasUploaded} setLineItems={setLineItems} />
         </>
       ) : (
         <>
