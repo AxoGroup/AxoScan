@@ -1,10 +1,13 @@
 import express from 'express';
 const router = express.Router();
 import cors from 'cors';
-
+import multer from 'multer'
+//multer variables
+const storage = multer.memoryStorage()
+const upload = multer({ storage: storage });
 // eslint-disable-next-line no-unused-vars
-import receiptController from '../controllers/receiptControllers';
-import searchArray from '../controllers/searchArray';
+import receiptController from '../controllers/receiptControllers.js';
+import searchArray from '../controllers/searchArray.js';
 
 router.use(
     cors({
@@ -14,9 +17,12 @@ router.use(
 );
 
 // post request
-router.post('/upload', 
+router.post('/upload', upload.single('file'),
 receiptController.uploadReceipt, searchArray.searched, 
 (req, res) =>  res.status(200).json(res.locals.object));
+
+
+
 
 // eslint-disable-next-line no-undef
 export default router;
