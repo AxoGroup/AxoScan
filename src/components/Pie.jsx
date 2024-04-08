@@ -13,6 +13,7 @@ const DemoPie = ({ lineItems }) => {
       style: {
         fontWeight: 'bold',
       },
+      offset: 50,
     },
     legend: {
       color: {
@@ -31,5 +32,3 @@ const DemoPie = ({ lineItems }) => {
 };
 
 export default DemoPie;
-
-// ReactDOM.render(<DemoPie />, document.getElementById('container'));
