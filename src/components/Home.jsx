@@ -21,7 +21,7 @@ export default function Home() {
         <>
           <Pie lineItems={lineItems} />
 
-          <p style={{ marginBottom: '25px', fontSize: '24px' }}>Total: ${total}</p>
+          <p style={{ marginBottom: '25px', fontSize: '24px' }}>Total: ${+total.toFixed(2)}</p>
 
           <UploadButton style={{ marginRight: '10px' }} setHasUploaded={setHasUploaded} setLineItems={setLineItems} />
         </>
