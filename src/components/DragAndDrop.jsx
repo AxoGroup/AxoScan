@@ -16,11 +16,16 @@ const DragAndDrop = ({ setHasUploaded, setLineItems }) => {
 
   const customRequest = async ({ file, onSuccess, onError }) => {
     const formData = new FormData();
+    // from taggun
+    formData.append('refresh', 'false');
+    formData.append('incognito', 'false');
+    formData.append('extractTime', 'false');
+    formData.append('extractLineItems', 'true');
+    formData.append('file', file);
 
-    formData.append('image', file, file.name);
     // update url from backend
     try {
-      const response = await axios.post('/api/scan', formData, {
+      const response = await axios.post('/api/upload', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
