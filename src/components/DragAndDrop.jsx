@@ -11,10 +11,12 @@ const DragAndDrop = ({ setHasUploaded, setLineItems }) => {
   const [sumbitted, setSubmitted] = useState(false);
   const [progress, setProgress] = useState(0);
 
+  
   const handleChange = (info) => {
     let fileList = [...info.fileList];
     fileList = fileList.slice(-1);
     setFileList(fileList);
+    console.log('fileList: ', fileList);
   };
 
   const customRequest = async ({ file, onSuccess, onError }) => {
@@ -22,6 +24,8 @@ const DragAndDrop = ({ setHasUploaded, setLineItems }) => {
     formData.append('file', file);
     console.log(file);
     setSubmitted(true);
+
+    //Moving the progress bar. Updating the bar every second until it reaches 100% 
     let startTime = Date.now();
     let estimatedUploadTime = 10000; // Start with an initial estimate of 10 seconds for the upload
 
@@ -41,6 +45,7 @@ const DragAndDrop = ({ setHasUploaded, setLineItems }) => {
     };
 
     // update url from backend
+    // WHY NOT JUST USE THE ACTION PROPERTY ON DRAGGER?
     try {
       const response = await axios.post('/api/upload', formData, config);
       clearInterval(progressInterval);
@@ -51,6 +56,7 @@ const DragAndDrop = ({ setHasUploaded, setLineItems }) => {
         setLineItems(response.data);
       }
       setHasUploaded(true);
+      // reset the progress bar
       setSubmitted(false);
       setProgress(0);
       onSuccess(response.data);
@@ -74,7 +80,6 @@ const DragAndDrop = ({ setHasUploaded, setLineItems }) => {
           Click or drag file to this area to upload
         </p>
         <p className="ant-upload-hint" style={{ color: 'rgba(255, 255, 255, 0.55)' }}>
-          {' '}
           Support for a single upload. Strictly prohibited from uploading company data or other banned files.
         </p>
       </Dragger>

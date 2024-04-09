@@ -10,6 +10,10 @@ import receiptController from '../controllers/receiptControllers.js';
 import searchArray from '../controllers/searchArray.js';
 import memorize from '../controllers/memorize.js';
 
+// IMPORT MODEL INTO THE HERE OR CONTROLLER
+// THATMODEL.CREATE
+// THATMODEL.FIND
+
 router.use(
   cors({
     credentials: true,
@@ -18,6 +22,8 @@ router.use(
 );
 
 // post request
+//TODO: REVIEW THIS, WE MAY BE ABLE TO JUST REPLACE WITH MONGO DB
+//MODEL.CREATE(FILE)
 router.post('/upload', upload.single('file'), memorize, receiptController.uploadReceipt, searchArray.searched, receiptController.saveReceipt, (req, res) => res.status(200).json(res.locals.array));
 
 // eslint-disable-next-line no-undef
