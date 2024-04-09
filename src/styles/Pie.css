@@ -1,5 +1,15 @@
-#root > div > div:nth-child(3){
+#root > div > div:nth-child(3) {
   height: 50%;
   width: 50%;
-  margin-left: 75px
+  margin-left: 75px;
 }
+
+/* #root > div > div.pie-container > div {
+  height: 100%;
+  width: 100%;
+}
+
+#root > div > div.pie-container > div > canvas {
+  height: 100%;
+  width: 100%;
+} */
