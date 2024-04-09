@@ -8,6 +8,7 @@ const upload = multer({ storage: storage });
 // eslint-disable-next-line no-unused-vars
 import receiptController from '../controllers/receiptControllers.js';
 import searchArray from '../controllers/searchArray.js';
+import memorize from '../controllers/memorize.js'
 
 router.use(
     cors({
@@ -18,8 +19,8 @@ router.use(
 
 // post request
 router.post('/upload', upload.single('file'),
-receiptController.uploadReceipt, searchArray.searched, 
-(req, res) =>  res.status(200).json(res.locals.object));
+memorize, receiptController.uploadReceipt, searchArray.searched, receiptController.saveReceipt,
+(req, res) =>  res.status(200).json(res.locals.array));
 
 
 
