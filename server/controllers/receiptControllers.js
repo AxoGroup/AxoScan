@@ -15,7 +15,7 @@ const receiptController = {
 
       const options = {
         method: 'POST',
-        headers: { accept: 'application/json', apikey: 'b6abedc0f43c11ee9433edbb2578dfab' },
+        headers: { accept: 'application/json', apikey: '65d90c50f6b911ee9433edbb2578dfab' },
       };
 
       options.body = form;
