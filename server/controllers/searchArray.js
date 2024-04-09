@@ -19,8 +19,7 @@ const searchArray = {
       type,
       value,
     }));
-
-    res.locals.object = searchNameAndValue;
+    res.locals.array = searchNameAndValue;
     return next();
   },
 };

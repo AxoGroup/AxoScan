@@ -1,5 +1,6 @@
 import fetch from 'node-fetch';
 import FormData from 'form-data';
+import Receipt from '../models/models.js';
 
 const receiptController = {
   async uploadReceipt(req, res, next) {
@@ -22,16 +23,21 @@ const receiptController = {
       const response = await fetch('https://api.taggun.io/api/receipt/v1/verbose/file', options);
       const parsedData = await response.json();
       const productArray = parsedData.entities.productLineItems;
-      // for each element in ProductArray
-      // extract name
-      // data.name.data
-      // extract price
-      // data.totalPrice.data
-      console.log(JSON.stringify(productArray, null, 2));
+      res.locals.fileName = req.file.originalname;
       res.locals.array = productArray;
       return next();
     } catch (err) {
       return next({ log: 'Problem encountered fetching data from API', message: 'Could not retrieve receipt data' });
+    }
+  },
+
+  async saveReceipt(req, res, next) {
+    try {
+      console.log(res.locals.array);
+      await Receipt.create({ fileName: res.locals.fileName, receipt: res.locals.array });
+      return next();
+    } catch (err) {
+      return next({ log: 'Problem encountered sending information to Database', message: 'Problem with receipt response from DB' });
     }
   },
 };

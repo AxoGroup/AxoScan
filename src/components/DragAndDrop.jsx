@@ -45,13 +45,14 @@ const DragAndDrop = ({ setHasUploaded, setLineItems }) => {
       const response = await axios.post('/api/upload', formData, config);
       clearInterval(progressInterval);
       setProgress(100);
-      setSubmitted(false);
       message.success(`${file.name}, file uploaded successfully`);
       console.log('Server Response: ', response.data);
       if (response.data) {
         setLineItems(response.data);
       }
       setHasUploaded(true);
+      setSubmitted(false);
+      setProgress(0);
       onSuccess(response.data);
     } catch (error) {
       console.error('Server Response: ', error);
