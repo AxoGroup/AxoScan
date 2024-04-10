@@ -1,11 +1,23 @@
 import express from 'express';
 import path from 'path';
-const app = express();
-// eslint-disable-next-line no-unused-vars
-const PORT = 3000;
-
-// delcare routers
+import {mongoose} from 'mongoose'
 import uploadRouter from './routes/authRoutes.js';
+import 'dotenv/config';
+
+const PORT = 3000;
+const app = express();
+// delcare routers
+
+mongoose.connect(process.env.MONGO_URI, {
+  // Tells mongoose to use new URL parser for parsing connection strings to avoid depreciation warngings 
+  // useNewUrlParser: true,
+  //Enables new unified topology engine in MONGO db's Node.js driver, reccomended for new projects
+  // useUnifiedTopology: true,
+  // sets the name of the DB that our collections are part of
+  dbName: 'receipts'
+})
+  .then(() => console.log('Connected to Mongo DB.'))
+  .catch(err => console.log('Mongo Connection error', err));
 
 // handle parsing request body
 app.use(express.json());
