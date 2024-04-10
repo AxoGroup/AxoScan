@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import { MinusOutlined, PlusOutlined } from '@ant-design/icons';
-import { Button, Flex, Progress } from 'antd';
-const App = ({ percent }) => {
+import React from 'react';
+import { Flex, Progress } from 'antd';
+import PropTypes from 'prop-types'
+const ProgressBar = ({ percent }) => {
   return (
     <Flex vertical gap="small">
       <Flex vertical gap="small">
@@ -11,4 +11,7 @@ const App = ({ percent }) => {
     </Flex>
   );
 };
-export default App;
+ProgressBar.propTypes = {
+  percent: PropTypes.number.isRequired
+}
+export default ProgressBar;
