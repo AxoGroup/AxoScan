@@ -1,8 +1,7 @@
 import mongoose from 'mongoose';
+import "dotenv/config"
 
-const MONGO_URI = 'mongodb+srv://InvectivusTaco:SomethingNewDontStealMyAccounts@cluster0.upscirl.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0'
-
-mongoose.connect(MONGO_URI, {
+mongoose.connect(process.env.MONGO_URI, {
   // options for the connect method to parse the URI
   useNewUrlParser: true,
   useUnifiedTopology: true,
