@@ -1,5 +1,6 @@
 import express from 'express';
 import path from 'path';
+import cookieParser from 'cookie-parser';
 const app = express();
 // eslint-disable-next-line no-unused-vars
 const PORT = 3000;
@@ -9,7 +10,8 @@ import uploadRouter from './routes/authRoutes.js';
 
 // handle parsing request body
 app.use(express.json());
-
+app.use(express.urlencoded());
+app.use(cookieParser());
 // favicon error handler
 app.get('/favicon.ico', (req, res) => res.status(204));
 
@@ -42,4 +44,4 @@ app.listen(PORT, () => {
   console.log(`Server is listening on port ${PORT}`);
 });
 
-// route handler to then send to middleware, then we can work ond atabase to connect / send data to databsae
+// route handler to then send to middleware, then we can work on database to connect / send data to database
