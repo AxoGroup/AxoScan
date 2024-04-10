@@ -13,6 +13,10 @@ export default function Home() {
   const [lineItems, setLineItems] = useState([]);
   const total = lineItems.reduce((acc, curr) => acc + curr.value, 0);
   console.log(total);
+  const handleClick = (event) => {
+    setHasUploaded(false);
+  };
+
   return (
     <div className="home-container">
       <TitleHeader className="header" />
@@ -23,7 +27,7 @@ export default function Home() {
 
           <p style={{ marginBottom: '25px', fontSize: '24px' }}>Total: ${+total.toFixed(2)}</p>
 
-          <UploadButton style={{ marginRight: '10px' }} setHasUploaded={setHasUploaded} setLineItems={setLineItems} />
+          <UploadButton style={{ marginRight: '10px' }} setHasUploaded={setHasUploaded} setLineItems={setLineItems} handleClick={handleClick}/>
         </>
       ) : (
         <>
