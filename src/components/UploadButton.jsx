@@ -1,8 +1,9 @@
 import React from 'react';
 import { Button } from 'antd';
+import PropTypes from 'prop-types'
 
-const App = ({ setHasUploaded }) => {
-  const handleClick = (event) => {
+const UploadButton = ({ setHasUploaded }) => {
+  const handleClick = () => {
     setHasUploaded(false);
   };
   return (
@@ -11,4 +12,9 @@ const App = ({ setHasUploaded }) => {
     </Button>
   );
 };
-export default App;
+//Enforce prop types
+UploadButton.propTypes = {
+  setHasUploaded: PropTypes.func.isRequired,
+};
+
+export default UploadButton;
