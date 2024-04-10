@@ -10,9 +10,11 @@
     "dev:frontend": "vite",
     "build": "vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
-    "test": "jest --verbose"
+    "test": "jest --verbose --detectOpenHandles"
   },
   "jest": {
+    "preset": "@shelf/jest-mongodb",
+    "globalTeardown": "<rootDir>/jest-teardown.js",
     "moduleNameMapper": {
       "\\.(css|less|sass|scss)$": "<rootDir>/__mocks__/styleMock.js",
       "\\.(gif|ttf|eot|svg)$": "<rootDir>/__mocks__/fileMock.js"
@@ -23,7 +25,7 @@
     "roots": [
       "<rootDir>/__tests__"
     ],
-    "testEnvironment": "jsdom",
+    "testEnvironment": "node",
     "clearMocks": true,
     "testRegex": "(__tests__/.*|(\\.|/)(test|spec))\\.js$",
     "moduleFileExtensions": [
@@ -57,6 +59,7 @@
     "@babel/preset-env": "^7.24.4",
     "@babel/preset-react": "^7.24.1",
     "@testing-library/jest-dom": "^6.4.2",
+    "@shelf/jest-mongodb": "^4.2.0",
     "@testing-library/react": "^14.3.0",
     "@testing-library/user-event": "^14.5.2",
     "@types/react": "^18.2.66",
