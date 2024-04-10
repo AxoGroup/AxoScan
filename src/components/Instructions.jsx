@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card, Space } from 'antd';
-const App = () => (
+const Instructions = () => (
   <Space direction="vertical" size={16} style={{ border: 'none' }}>
     <Card
       title="Effortless Upload Guide"
@@ -18,4 +18,4 @@ const App = () => (
     </Card>
   </Space>
 );
-export default App;
+export default Instructions;

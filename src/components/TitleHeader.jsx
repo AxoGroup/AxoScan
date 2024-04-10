@@ -1,8 +1,9 @@
 import React from 'react';
 import { Card } from 'antd';
 
-const App = () => (
+const TitleHeader = () => (
   <Card
+    data-testid="title-header-card"
     style={{
       color: 'white',
       backgroundColor: '#272727',
@@ -17,4 +18,4 @@ const App = () => (
     <h1>AxoScan</h1>
   </Card>
 );
-export default App;
+export default TitleHeader;

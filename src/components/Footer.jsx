@@ -1,10 +1,11 @@
 import React from 'react';
-import { Card } from 'antd';
 import { GithubOutlined } from '@ant-design/icons';
 import { v4 as uuidv4 } from 'uuid';
 import '../styles/Footer.css';
+import PropTypes from 'prop-types';
 
-export default function Footer() {
+
+const Footer = ()=> {
   const names = ['Sofia', 'Aiden', 'Austin', 'Sean', 'Dylan'];
   const urls = [
     'https://github.com/orgs/AxoGroup/people/sarhiri',
@@ -37,3 +38,11 @@ const Box = ({ name, url }) => {
     </div>
   );
 };
+
+//Enforce prop types
+Box.propTypes = {
+  name: PropTypes.string.isRequired,
+  url: PropTypes.string.isRequired,
+};
+
+export default Footer;
