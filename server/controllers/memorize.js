@@ -2,9 +2,9 @@ import Receipt from '../models/models.js';
 
 const memorizeDatabase = async (req, res, next) => {
   try {
-    const checkForReceipt = await Receipt.findOne({ fileName: req.file.originalname });
+    const checkForReceipt = await Receipt.findOne({ fileName: req.file.originalname }); // check if receipt is already in database
     if (checkForReceipt) {
-      console.log('req.file.originalname:', req.file.originalname, 'checkForReceipt.filename:', checkForReceipt.fileName);
+      console.log('req.file.originalname:', req.file.originalname, 'checkForReceipt.filename:', checkForReceipt.fileName);  
       console.log('we found a match, check database to see if func was correctly implemented');
       return res.status(200).send(checkForReceipt.receipt);
     } else {
