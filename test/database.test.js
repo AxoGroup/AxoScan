@@ -2,6 +2,7 @@ import assert from 'assert'
 import mongoose from 'mongoose';
 import Receipt from '../server/models/models.js';
 const MONGO_URI = 'mongodb+srv://InvectivusTaco:SomethingNewDontStealMyAccounts@cluster0.upscirl.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0'
+import { describe, it, beforeAll, afterAll } from 'vitest'
 
 
 describe('names are hard', function () {
@@ -15,7 +16,7 @@ describe('names are hard', function () {
 describe('Database', function() {
     const controlVar = "Target-pic-2-1024x999.jpg"
 
-    before('Database Test', async function() {
+    beforeAll('Database Test', async function() {
        try{ mongoose.connect(MONGO_URI, {
             // options for the connect method to parse the URI
             useNewUrlParser: true,
@@ -27,7 +28,7 @@ describe('Database', function() {
             throw new Error('databadse failed to connect')
         }
     });
-    after(async function(){
+    afterAll(async function(){
       try{ 
          mongoose.disconnect();
       } catch(err) {
