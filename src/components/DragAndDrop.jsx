@@ -5,6 +5,7 @@ import '../styles/DragAndDrop.css';
 import axios from 'axios';
 const { Dragger } = Upload;
 import ProgressBar from './ProgressBar';
+import React from 'react'
 
 const DragAndDrop = ({ setHasUploaded, setLineItems }) => {
   const [fileList, setFileList] = useState([]);
