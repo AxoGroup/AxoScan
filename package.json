@@ -10,7 +10,23 @@
     "dev:frontend": "vite",
     "build": "vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest --verbose"
+  },
+  "jest": {
+    "roots": [
+      "<rootDir>/__tests__"
+    ],
+    "testEnvironment": "node",
+    "clearMocks": true,
+    "testRegex": "(__tests__/.*|(\\.|/)(test|spec))\\.js$",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json",
+      "node"
+    ]
   },
   "dependencies": {
     "@ant-design/charts": "^2.0.3",
@@ -26,9 +42,13 @@
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.24.4",
+    "@babel/preset-env": "^7.24.4",
+    "@testing-library/react": "^14.3.0",
     "@types/react": "^18.2.66",
     "@types/react-dom": "^18.2.22",
     "@vitejs/plugin-react": "^4.2.1",
+    "babel-jest": "^29.7.0",
     "eslint": "^8.57.0",
     "eslint-plugin-react": "^7.34.1",
     "eslint-plugin-react-hooks": "^4.6.0",
