@@ -1,8 +1,7 @@
 import { User } from '../models/models.js';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-import process from 'process';
-import 'dotenv/config';
+// import process from 'process';
 const SALT_WORK_FACTOR = 10;
 
 const userController = {};
@@ -17,7 +16,9 @@ userController.createUser = async (req, res, next) => {
     const user = await User.create({ email: email, password: pwEncrypt }); // create a new user
     // console.log('user', user);
     res.locals.user = user;
-    const token = jwt.sign({ id: user._id }, process.env.VITE_SECRET_KEY, { expiresIn: '1hr' });
+    const token = jwt.sign({ id: user._id }, 'Bs2LMXC0BCli2QxblUagHCbpryioVow2', {
+      expiresIn: '1hr',
+    });
     res.cookie('token', token, { HttpOnly: true, secure: true });
     return next();
   } catch (error) {
@@ -44,7 +45,7 @@ userController.verifyUser = async (req, res, next) => {
     } else {
       console.log('user found');
       res.locals.user = user; // if user and password match then set the user in res.locals
-      const token = jwt.sign({ id: user._id }, process.env.VITE_SECRET_KEY, {
+      const token = jwt.sign({ id: user._id }, 'Bs2LMXC0BCli2QxblUagHCbpryioVow2', {
         expiresIn: '1hr',
       });
       res.cookie('token', token, { HttpOnly: true, secure: true });
