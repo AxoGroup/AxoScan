@@ -2,7 +2,7 @@ import fetch from 'node-fetch';
 import FormData from 'form-data';
 import { Receipt } from '../models/models.js';
 import axios from 'axios';
-// import process from 'process';
+import formatArray from './searchArray.js';
 
 const receiptController = {
   // controller object for receipt data handling
@@ -77,9 +77,9 @@ const receiptController = {
       }); // check if receipt is already in database
       if (checkForReceipt) {
         console.log('req.file.originalname:', req.file.originalname, 'checkForReceipt.filename:', checkForReceipt.fileName);
-        console.log('we found a match, check database to see if func was correctly implemented');
+
         const receipts = await Receipt.find({ userId: req.user.id });
-        return res.status(200).send(receipts);
+        return res.status(200).send(formatArray(receipts));
       } else {
         return next();
       }

@@ -8,7 +8,7 @@ const upload = multer({ storage: storage });
 // eslint-disable-next-line no-unused-vars
 import receiptController from '../controllers/receiptControllers.js';
 import userController from '../controllers/userController.js';
-import searchArray from '../controllers/searchArray.js';
+import formatArray from '../controllers/searchArray.js';
 
 router.use(
   cors({
@@ -22,9 +22,9 @@ router.get('/profile', upload.single('file'), userController.authenticateToken, 
 });
 
 // post request
-router.post('/upload', upload.single('file'), userController.authenticateToken, receiptController.memoize, receiptController.uploadReceipt, receiptController.saveReceipt, receiptController.getReceipts, searchArray.searched, (req, res) => {
+router.post('/upload', upload.single('file'), userController.authenticateToken, receiptController.memoize, receiptController.uploadReceipt, receiptController.saveReceipt, receiptController.getReceipts, (req, res) => {
   console.log('mdadet it to end ');
-  return res.status(200).json(res.locals.array);
+  return res.status(200).json(formatArray(res.locals.receipts));
 });
 router.post('/login', userController.findUser, userController.verifyUser);
 router.post('/signup', userController.createUser);
