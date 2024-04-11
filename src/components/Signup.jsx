@@ -39,6 +39,7 @@ const Signup = () => {
         toast.error(data.error);
       } else {
         setData({});
+        localStorage.setItem('token', data.token);
         toast.success('Signup Successful. Welcome!');
         navigate('/');
       }

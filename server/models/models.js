@@ -17,7 +17,7 @@ const Schema = mongoose.Schema;
 
 const receiptItemSchema = new Schema(
   {
-    type: { type: String, required: true },
+    type: String,
     value: { type: Number, required: true },
   },
   { _id: false }

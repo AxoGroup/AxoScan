@@ -33,8 +33,11 @@ const DragAndDrop = ({ setHasUploaded, setLineItems }) => {
     };
 
     let progressInterval = setInterval(updateProgress, 1000);
-
+    const token = localStorage.getItem('token');
     const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
       onUploadProgress: (progressEvent) => {
         let percentage = (progressEvent.loaded * 100) / progressEvent.total;
         setProgress(percentage);
@@ -43,7 +46,7 @@ const DragAndDrop = ({ setHasUploaded, setLineItems }) => {
 
     // update url from backend
     try {
-      const response = await axios.post('/api/upload', formData, config);
+      const response = await axios.post('http://localhost:3000/api/upload', formData, config);
       clearInterval(progressInterval);
       setProgress(100);
       message.success(`${file.name}, file uploaded successfully`);

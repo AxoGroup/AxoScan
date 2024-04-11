@@ -6,7 +6,7 @@ import './App.css';
 import Signup from './components/Signup.jsx';
 
 const isAuthenticated = () => {
-  return localStorage.getItem('userToken') ? true : false;
+  return localStorage.getItem('token') ? true : false;
 };
 
 function App() {

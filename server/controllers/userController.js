@@ -1,6 +1,6 @@
-import { User } from '../models/models.js';
-import bcrypt from 'bcrypt';
-import jwt from 'jsonwebtoken';
+import { User } from "../models/models.js";
+import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 // import process from 'process';
 const SALT_WORK_FACTOR = 10;
 
@@ -16,15 +16,21 @@ userController.createUser = async (req, res, next) => {
     const user = await User.create({ email: email, password: pwEncrypt }); // create a new user
     // console.log('user', user);
     res.locals.user = user;
-    const token = jwt.sign({ id: user._id }, 'Bs2LMXC0BCli2QxblUagHCbpryioVow2', {
-      expiresIn: '1hr',
-    });
-    res.cookie('token', token, { HttpOnly: true, secure: true });
-    return next();
+    const token = jwt.sign(
+      { id: user._id },
+      "Bs2LMXC0BCli2QxblUagHCbpryioVow2",
+      {
+        expiresIn: "1hr",
+      }
+    );
+    res.locals.token = token;
+    res.status(201).json({ token });
+    // res.cookie('token', token);
+    // return next();
   } catch (error) {
     return next({
-      log: 'Error in UserController.createUser middleware',
-      message: { err: 'Error in UserController.createUser middleware' },
+      log: "Error in UserController.createUser middleware",
+      message: { err: "Error in UserController.createUser middleware" },
     });
   }
 };
@@ -32,30 +38,44 @@ userController.createUser = async (req, res, next) => {
 userController.verifyUser = async (req, res, next) => {
   const { email, password } = req.body;
   const { user } = res.locals;
-  console.log('email', email, 'password', password, 'user.password', user.password);
+  console.log(
+    "email",
+    email,
+    "password",
+    password,
+    "user.password",
+    user.password
+  );
   try {
     const isMatch = await bcrypt.compare(password, user.password); // compare the password with the encrypted password in the database
     if (!isMatch) {
       // if password does not match
-      console.log('invalid at !isMatch');
+      console.log("invalid at !isMatch");
       return next({
-        log: 'Error: password does not match the username',
-        message: { err: 'Invalid userName and/or password' },
+        log: "Error: password does not match the username",
+        message: { err: "Invalid userName and/or password" },
       });
     } else {
-      console.log('user found');
+      console.log("user found");
       res.locals.user = user; // if user and password match then set the user in res.locals
-      const token = jwt.sign({ id: user._id }, 'Bs2LMXC0BCli2QxblUagHCbpryioVow2', {
-        expiresIn: '1hr',
-      });
-      res.cookie('token', token, { HttpOnly: true, secure: true });
-      return next();
+
+      const token = jwt.sign(
+        { id: user._id },
+        "Bs2LMXC0BCli2QxblUagHCbpryioVow2",
+        {
+          expiresIn: "1hr",
+        }
+      );
+      res.locals.token = token;
+      res.status(200).json({ token });
+      // res.cookie('token', token);
+      // return next();
     }
   } catch (error) {
     console.log(error);
     return next({
-      log: 'Error in UserController.verifyUser middleware',
-      message: { err: 'Error in UserController.verifyUser middleware' },
+      log: "Error in UserController.verifyUser middleware",
+      message: { err: "Error in UserController.verifyUser middleware" },
     });
   }
 };
@@ -66,16 +86,16 @@ userController.findUser = async (req, res, next) => {
   try {
     if (!email) {
       return next({
-        log: 'Invalid username',
-        message: { err: 'Invalid username or password' },
+        log: "Invalid username",
+        message: { err: "Invalid username or password" },
       });
     } else {
       const user = await User.findOne({ email }); // find the user by email (mongoose method)
       if (!user) {
         // if user does not exist
         return next({
-          log: 'Invalid password',
-          message: { err: 'Invalid username or password' },
+          log: "Invalid password",
+          message: { err: "Invalid username or password" },
         });
       } else {
         res.locals.user = user; // if user and password match then set the user in res.locals
@@ -85,20 +105,22 @@ userController.findUser = async (req, res, next) => {
   } catch (error) {
     console.log(error);
     next({
-      log: 'Error in UserController.findUser middleware',
-      message: { err: 'Error in UserController.findUser middleware' },
+      log: "Error in UserController.findUser middleware",
+      message: { err: "Error in UserController.findUser middleware" },
     });
   }
 };
 
 userController.authenticateToken = async (req, res, next) => {
-  const { token } = req.cookies;
-  if (token === null) return res.status(403).json({ error: 'Unauthorized' });
-  jwt.verify(token, process.env.VITE_SECRET_KEY, (err, decoded) => {
+  console.log(req.headers);
+  const authHeader = req.headers["authorization"];
+  const token = authHeader && authHeader.split(" ")[1];
+  if (token === null) return res.status(401).json({ error: "Unauthorized" });
+  jwt.verify(token, "Bs2LMXC0BCli2QxblUagHCbpryioVow2", (err, user) => {
     if (err) {
-      res.status(401).json({ error: 'Unauthorized' });
+      return res.status(403).json({ error: "Forbidden" });
     } else {
-      res.locals.decoded = decoded;
+      req.user = { id: user.id };
       return next();
     }
   });
