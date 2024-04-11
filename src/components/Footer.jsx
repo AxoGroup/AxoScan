@@ -6,13 +6,13 @@ import PropTypes from 'prop-types';
 
 
 const Footer = ()=> {
-  const names = ['Sofia', 'Aiden', 'Austin', 'Sean', 'Dylan'];
+  const names = ['Chris', 'Ellis', 'Logan', 'Sean', 'Stephen'];
   const urls = [
-    'https://github.com/orgs/AxoGroup/people/sarhiri',
-    'https://github.com/orgs/AxoGroup/people/AidenCarere',
-    'https://github.com/orgs/AxoGroup/people/InvectivusTaco',
-    'https://github.com/orgs/AxoGroup/people/sfryan95',
-    'https://github.com/orgs/AxoGroup/people/dsterling7',
+    'https://github.com/chrisr0892',
+    'https://github.com/elsong86',
+    'https://github.com/ljn16',
+    'https://github.com/sfryan95',
+    'https://github.com/stephenhyang',
   ];
   const res = [];
 

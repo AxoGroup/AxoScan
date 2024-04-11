@@ -1,7 +1,9 @@
-import React from "react";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { Flex, ConfigProvider } from "antd";
+import React from 'react';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { Flex, ConfigProvider } from 'antd';
+import { Link } from 'react-router-dom';
+
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -61,6 +63,10 @@ const Login = () => {
             />
             <button type="submit">Login</button>
           </form>
+          <Flex align='center' gap='small'>
+            <p>Don't have an account?</p>
+            <Link to="/signup" style={{ color: 'white', fontSize: '16px', textDecoration: 'none' }}>Sign Up</Link>
+          </Flex>
         </Flex>
       </Flex>
     </ConfigProvider>
