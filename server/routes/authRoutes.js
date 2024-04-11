@@ -17,6 +17,16 @@ router.use(
   })
 );
 
+router.get(
+  "/get-receipts",
+  upload.single("file"),
+  userController.authenticateToken,
+  receiptController.getReceipts,
+  (req, res) => {
+    return res.status(200).json(res.locals.receipts);
+  }
+);
+
 // post request
 router.post(
   "/upload",

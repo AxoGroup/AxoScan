@@ -33,6 +33,7 @@ const receiptController = {
       ); // fetch request to the API
       const parsedData = await response.json(); // parse the response data
       const productArray = parsedData.entities.productLineItems; // extract the product line items from the parsed data
+      res.locals.totalAmount = parsedData.totalAmount.data;
       res.locals.fileName = req.file.originalname; // save the file name to res.locals
       res.locals.array = productArray; // save the product array to res.locals
       return next();
@@ -48,11 +49,13 @@ const receiptController = {
     console.log("made it to saveReceipt");
     // save the receipt data to the database
     try {
-      console.log("res.locals.fileName", res.locals.fileName);
-      console.log("res.locals.array", res.locals.array);
+      // console.log("res.locals.fileName", res.locals.fileName);
+      // console.log("res.locals.array", res.locals.array);
       await Receipt.create({
         fileName: res.locals.fileName,
         receipt: res.locals.array,
+        total: res.locals.totalAmount,
+        userId: req.user.id,
       }); // create a new document in the database
       console.log("after create check");
       return next();
@@ -91,6 +94,18 @@ const receiptController = {
       });
     }
   },
+  async getReceipts(req, res, next) {
+    try {
+      const receipts = await Receipt.find({userId: req.user.id})
+      res.locals.receipts = receipts;
+      return next();
+    } catch (e) {
+      return next({
+        log: "Problem encountered with getReceipts middleware",
+        message: { err: `problem in middleware check logs ${e}` },
+      });
+    }
+  }
 };
 
 export default receiptController;
