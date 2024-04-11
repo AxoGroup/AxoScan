@@ -1,49 +1,29 @@
-import assert from 'assert'
 import mongoose from 'mongoose';
+import 'dotenv/config';
+import { test, assert, describe, onTestFinished } from 'vitest';
 import Receipt from '../server/models/models.js';
-const MONGO_URI = 'mongodb+srv://InvectivusTaco:SomethingNewDontStealMyAccounts@cluster0.upscirl.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0'
-import { describe, it, beforeAll, afterAll } from 'vitest'
 
+describe('Database', function () {
+	describe('testing database connection', function () {
+		test('can we connect?', async function () {
+			onTestFinished(() => mongoose.disconnect());
+			assert.ok(
+				await mongoose.connect(process.env.MONGO_URI),
+				'should connect to database'
+			);
+		});
+	});
 
-describe('names are hard', function () {
-    describe('test', function() {
-    it('test to check if mocha works', function(){
-        assert.equal(1 === 1, true);
-    });
-  });
-});
-
-describe('Database', function() {
-    const controlVar = "Target-pic-2-1024x999.jpg"
-
-    beforeAll('Database Test', async function() {
-       try{ mongoose.connect(MONGO_URI, {
-            // options for the connect method to parse the URI
-            useNewUrlParser: true,
-            useUnifiedTopology: true,
-            // sets the name of the DB that our collections are part of
-            dbName: 'receipts'
-          })
-        } catch(err) {
-            throw new Error('databadse failed to connect')
-        }
-    });
-    afterAll(async function(){
-      try{ 
-         mongoose.disconnect();
-      } catch(err) {
-        throw new Error('Database failed to disconnect')
-      } 
-    });
-
-    describe('testing memorize', function() {
-        it('test\'s to see if we can find img filename in database', async function () {
-            try {
-            const test = await Receipt.findOne({fileName: controlVar})
-            assert.ok(test, 'something')
-            } catch(err) {
-                throw new Error('Database failed to retrieve data / does not exist in database')
-            }
-        });
-    });
+	describe('testing memorize', function () {
+		test("test's to see if we can find img filename in database", async function () {
+      const controlVar = 'Target-pic-2-1024x999.jpg';
+			onTestFinished(() => mongoose.disconnect());
+      await mongoose.connect(process.env.MONGO_URI);
+			const test = await Receipt.findOne({ fileName: controlVar });
+			assert.ok(
+				test,
+				'should return database entry filename if its in database'
+			);
+		});
+	});
 });

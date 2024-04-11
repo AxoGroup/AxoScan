@@ -16,6 +16,7 @@
   "dependencies": {
     "@ant-design/charts": "^2.0.3",
     "@ant-design/icons": "^5.3.6",
+    "@testing-library/jest-dom": "^6.4.2",
     "antd": "^5.16.1",
     "axios": "^1.6.8",
     "concurrently": "^8.2.2",
@@ -32,6 +33,7 @@
     "@types/react": "^18.2.66",
     "@types/react-dom": "^18.2.22",
     "@vitejs/plugin-react": "^4.2.1",
+    "dotenv": "^16.4.5",
     "eslint": "^8.57.0",
     "eslint-plugin-react": "^7.34.1",
     "eslint-plugin-react-hooks": "^4.6.0",
