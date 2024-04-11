@@ -7,6 +7,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  border: .2em solid #000102;
+  padding-bottom: .2em
 }
 
 .signup-form-container {
