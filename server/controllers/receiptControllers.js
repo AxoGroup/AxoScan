@@ -1,6 +1,6 @@
 import fetch from 'node-fetch';
 import FormData from 'form-data';
-import Receipt from '../models/models.js';
+import { User, Receipt } from '../models/models.js';
 
 const receiptController = {
   async uploadReceipt(req, res, next) {
@@ -34,8 +34,31 @@ const receiptController = {
   async saveReceipt(req, res, next) {
     try {
       console.log(res.locals.array);
-      await Receipt.create({ fileName: res.locals.fileName, receipt: res.locals.array });
+      const receiptData = await Receipt.create({ fileName: res.locals.fileName, receipt: res.locals.array });
+      
+      const userId = req.body.userId //replace with static user_id
+      const user = await User.findById(userId);
+
+      const lineItems = res.locals.array;
+      const total = lineItems.reduce((sum, currentItem) => sum + currentItem.value, 0);
+      user.receipts.push({receiptData, total});
+
       return next();
+    } catch (err) {
+      return next({ log: 'Problem encountered sending information to Database', message: 'Problem with receipt response from DB' });
+    }
+  },
+
+  async totalSum(req, res, next) {
+    try {
+      const userId = req.body.userId //replace with static user_id
+      const user = await User.findById(userId);
+
+      const total = user.receipts.reduce((total, currentReceipt) => total + currentReceipt.total, 0)
+
+      res.locals.totalSum = total;
+      return next();
+      
     } catch (err) {
       return next({ log: 'Problem encountered sending information to Database', message: 'Problem with receipt response from DB' });
     }
