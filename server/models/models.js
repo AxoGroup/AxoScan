@@ -1,6 +1,7 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
-const MONGO_URI = 'mongodb+srv://loganjnelsen:nL2cBABYu9iJjHvT@axoscan.iegl9s6.mongodb.net/?retryWrites=true&w=majority&appName=AxoScan';
+const MONGO_URI =
+  "mongodb+srv://loganjnelsen:nL2cBABYu9iJjHvT@axoscan.iegl9s6.mongodb.net/?retryWrites=true&w=majority&appName=AxoScan";
 
 mongoose
   .connect(MONGO_URI, {
@@ -8,16 +9,16 @@ mongoose
     // useNewUrlParser: true,
     // useUnifiedTopology: true,
     // sets the name of the DB that our collections are part of
-    dbName: 'axoScan',
+    dbName: "axoScan",
   })
-  .then(() => console.log('Connected to Mongo DB.'))
+  .then(() => console.log("Connected to Mongo DB."))
   .catch((err) => console.log(err));
 
 const Schema = mongoose.Schema;
 
 const receiptItemSchema = new Schema(
   {
-    type: { type: String, required: true },
+    type: String,
     value: { type: Number, required: true },
   },
   { _id: false }
@@ -26,6 +27,8 @@ const receiptItemSchema = new Schema(
 const receiptSchema = new Schema({
   fileName: { type: String, required: true },
   receipt: { type: [receiptItemSchema], required: true },
+  total: { type: Number, required: true },
+  userId: { type: Schema.Types.ObjectId, ref: "User", required: true}
 });
 
 // [{ type: String, value: Number }]
@@ -35,7 +38,7 @@ const userSchema = new Schema({
   password: { type: String, required: true },
 });
 
-const Receipt = mongoose.model('receipt', receiptSchema);
-const User = mongoose.model('user', userSchema);
+const Receipt = mongoose.model("receipt", receiptSchema);
+const User = mongoose.model("user", userSchema);
 
 export { Receipt, User };

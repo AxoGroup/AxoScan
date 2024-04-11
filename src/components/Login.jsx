@@ -6,34 +6,33 @@ import { Link } from 'react-router-dom';
 
 
 const Login = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('http://localhost:3000/api/login', {
+      const response = await fetch("http://localhost:3000/api/login", {
         //adjust url as needed
-        method: 'POST',
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({ email, password }),
       });
-
       if (response.ok) {
         const data = await response.json();
-        localStorage.setItem('userToken', data.token); // Example action on success
-        navigate('/'); // Navigate to home
+        localStorage.setItem("token", data.token); // Example action on success
+        navigate("/"); // Navigate to home
       } else {
         // Handle non-200 responses
         const errorResponse = await response.json(); // Make sure server sends JSON on errors
-        alert(errorResponse.error || 'An error occurred');
+        alert(errorResponse.error || "An error occurred");
       }
     } catch (error) {
-      console.error('Error:', error);
-      alert('Invalid Credentials');
+      console.error("Error:", error);
+      alert("Invalid Credentials");
     }
   };
   return (
@@ -42,26 +41,27 @@ const Login = () => {
         token: {
           fontFamily: '"Noto Sans", sans-serif, "Apple Color Emoji"',
         },
-      }}>
-      <Flex justify='center' align='center' style={{ height: '100vh' }}>
-        <Flex vertical justify='center' align='center'>
+      }}
+    >
+      <Flex justify="center" align="center" style={{ height: "100vh" }}>
+        <Flex vertical justify="center" align="center">
           <h2>Login</h2>
           <form onSubmit={handleSubmit}>
             <input
-              type='text'
-              placeholder='User E-Mail'
+              type="text"
+              placeholder="User E-Mail"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
             />
             <input
-              type='password'
-              placeholder='Password'
+              type="password"
+              placeholder="Password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
             />
-            <button type='submit'>Login</button>
+            <button type="submit">Login</button>
           </form>
           <Flex align='center' gap='small'>
             <p>Don't have an account?</p>

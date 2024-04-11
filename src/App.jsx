@@ -8,7 +8,7 @@ import { Toaster } from 'react-hot-toast'
 import Profile from './components/Profile.jsx';
 
 const isAuthenticated = () => {
-  return localStorage.getItem('userToken') ? true : false;
+  return localStorage.getItem('token') ? true : false;
 };
 
 function App() {

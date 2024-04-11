@@ -48,6 +48,7 @@ const Signup = () => {
 
       } else {
         setData({});
+        localStorage.setItem('token', data.token);
         toast.success('Signup Successful. Welcome!');
         navigate('/');
       }
