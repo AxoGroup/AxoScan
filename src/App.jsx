@@ -1,5 +1,6 @@
 import React from 'react';
 import Home from './components/Home.jsx';
+import { BrowserRouter, Route, Router, Link } from 'react-router-dom'
 import './App.css';
 
 function App() {
@@ -7,7 +8,12 @@ function App() {
 
   return (
     <>
-      <Home />
+    <BrowserRouter>
+      <Router>
+      <Route path='/' element={<Home />}/>
+      <Route path='/totalSum' element={}/>
+      </Router>
+    </BrowserRouter>
     </>
   );
 }
