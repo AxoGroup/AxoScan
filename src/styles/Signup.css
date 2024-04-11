@@ -1,0 +1,56 @@
+.title {
+  font-family: 'Impact';
+  font-size: 3em
+}
+
+.signup-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: .2em solid #000102;
+  padding-bottom: .2em
+}
+
+.signup-form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.signup-form-element {
+  margin-top: .25em;
+  margin-bottom: .25em;
+}
+
+.submit-btn {
+  background-color: #0f832b; /* Blue background color */
+  color: #000102; /* White text color */
+  padding: 10px 20px; /* Padding inside the button */
+  border: .2em solid #000102; /* No border */
+  border-radius: 5px; /* Rounded corners */
+  cursor: pointer; /* Cursor style on hover */
+  font-size: 16px; /* Font size */
+  font-weight: bold; /* Bold text */
+  margin-top: .25em;
+  margin-bottom: .25em;
+}
+
+.submit-btn:hover {
+  background-color: #0bbc6a; /* Darker blue background color on hover */
+}
+
+.alr-reg-btn {
+  margin-top: .25em;
+  margin-bottom: .25em;
+  background-color: #c3eccc;
+  color: #000102;
+  border: .2em solid #000102; /* No border */
+  border-radius: 5px;
+  padding: 10px 10px;
+  font-weight: bold;
+}
+
+.footer-signup {
+  margin-top: .25em;
+  margin-bottom: .25em;
+}
