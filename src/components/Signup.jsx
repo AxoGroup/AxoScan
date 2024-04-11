@@ -12,42 +12,43 @@ const Signup = () => {
     username: '',
     email: '',
     password: '',
-    confirmPassword: ''
+    confirmPassword: '',
   });
 
   const signup = async (e) => {
-    e.preventDefault()
-    const {username, email, password, confirmPassword} = data;
+    e.preventDefault();
+    const { username, email, password, confirmPassword } = data;
     if (confirmPassword !== password) {
-        toast.error('Password not match, try again')
-      }
+      toast.error('Password not match, try again');
+    }
     // console.log('hello');
     try {
-      const {data} = await axios.post('/signup', {
-        username, email, password
-      })
+      const { data } = await axios.post('http://localhost:3000/api/signup', {
+        username,
+        email,
+        password,
+      });
 
       // console.log(data);
 
-      if (data.status === 400){
+      if (data.status === 400) {
         toast.error('Username or email already exists');
       }
 
       if (data.error) {
-        toast.error(data.error)
+        toast.error(data.error);
       } else {
-        setData({})
-        toast.success('Signup Successful. Welcome!')
-        navigate('/login')
+        setData({});
+        toast.success('Signup Successful. Welcome!');
+        navigate('/');
       }
     } catch (error) {
-      if (error.response && error.response.status === 400){
+      if (error.response && error.response.status === 400) {
         toast.error('Email/Username already in use');
-        console.error('Email/Username error', error.response.data.error)
+        console.error('Email/Username error', error.response.data.error);
       } else {
-        console.log(error)
+        console.log(error);
       }
-
     }
   };
   return (
@@ -76,7 +77,6 @@ const Signup = () => {
     </div>
     </Flex>
   );
+};
 
-}
-
-export default Signup
+export default Signup;

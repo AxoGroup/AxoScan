@@ -1,6 +1,7 @@
 import fetch from 'node-fetch';
 import FormData from 'form-data';
 import { Receipt } from '../models/models.js';
+// import process from 'process';
 
 const receiptController = {
   // controller object for receipt data handling
@@ -29,7 +30,10 @@ const receiptController = {
       res.locals.array = productArray; // save the product array to res.locals
       return next();
     } catch (err) {
-      return next({ log: 'Problem encountered fetching data from API', message: 'Could not retrieve receipt data' });
+      return next({
+        log: 'Problem encountered fetching data from API',
+        message: 'Could not retrieve receipt data',
+      });
     }
   },
 
@@ -39,7 +43,10 @@ const receiptController = {
       await Receipt.create({ fileName: res.locals.fileName, receipt: res.locals.array }); // create a new document in the database
       return next();
     } catch (err) {
-      return next({ log: 'Problem encountered sending information to Database', message: 'Problem with receipt response from DB' });
+      return next({
+        log: 'Problem encountered sending information to Database',
+        message: 'Problem with receipt response from DB',
+      });
     }
   },
 
@@ -47,7 +54,12 @@ const receiptController = {
     try {
       const checkForReceipt = await Receipt.findOne({ fileName: req.file.originalname }); // check if receipt is already in database
       if (checkForReceipt) {
-        console.log('req.file.originalname:', req.file.originalname, 'checkForReceipt.filename:', checkForReceipt.fileName);
+        console.log(
+          'req.file.originalname:',
+          req.file.originalname,
+          'checkForReceipt.filename:',
+          checkForReceipt.fileName
+        );
         console.log('we found a match, check database to see if func was correctly implemented');
         return res.status(200).send(checkForReceipt.receipt);
       } else {
