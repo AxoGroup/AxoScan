@@ -5,6 +5,7 @@ import '../styles/DragAndDrop.css';
 import axios from 'axios';
 const { Dragger } = Upload;
 import ProgressBar from './ProgressBar';
+import React from 'react'
 
 const DragAndDrop = ({ setHasUploaded, setLineItems }) => {
   const [fileList, setFileList] = useState([]);
@@ -66,7 +67,7 @@ const DragAndDrop = ({ setHasUploaded, setLineItems }) => {
 
   return (
     <>
-      <Dragger name="file" multiple={false} fileList={fileList} onChange={handleChange} customRequest={customRequest} onRemove={() => setFileList([])} id="drag-and-drop">
+      <Dragger name="file" data-testid="drag-and-drop" multiple={false} fileList={fileList} onChange={handleChange} customRequest={customRequest} onRemove={() => setFileList([])} id="drag-and-drop">
         <p className="ant-upload-drag-icon">
           <InboxOutlined style={{ color: '#f19cbb' }} />
         </p>
