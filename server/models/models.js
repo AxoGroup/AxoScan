@@ -21,5 +21,11 @@ const receiptSchema = new Schema({
 
 const Receipt = mongoose.model('receipt', receiptSchema);
 
-export default Receipt;
+const userSchema = new Schema({
+  receipts: {type: Array, require: true}
+})
+
+const User = mongoose.model('user', userSchema);
+
+export default { User , Receipt};
 
