@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { Flex, ConfigProvider } from 'antd';
 
 const Login = () => {
-  const [userEmail, setUserEmail] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
@@ -17,7 +17,7 @@ const Login = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ userEmail, password }),
+        body: JSON.stringify({ email, password }),
       });
 
       if (response.ok) {
@@ -48,8 +48,8 @@ const Login = () => {
             <input
               type='text'
               placeholder='User E-Mail'
-              value={userEmail}
-              onChange={(e) => setUserEmail(e.target.value)}
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               required
             />
             <input
