@@ -1,6 +1,7 @@
 import fetch from 'node-fetch';
 import FormData from 'form-data';
-import { User, Receipt } from '../models/models.js';
+import { Receipt } from '../models/models.js';
+import { User } from '../models/userModel.js';
 
 const receiptController = {
   async uploadReceipt(req, res, next) {

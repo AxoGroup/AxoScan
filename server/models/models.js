@@ -21,11 +21,6 @@ const receiptSchema = new Schema({
 
 const Receipt = mongoose.model('receipt', receiptSchema);
 
-const userSchema = new Schema({
-  receipts: {type: Array, require: true}
-})
 
-const User = mongoose.model('user', userSchema);
-
-export default { User , Receipt};
+export default { Receipt };
 

@@ -1,7 +1,8 @@
 import React from 'react';
 import Home from './components/Home.jsx';
-import { BrowserRouter, Route, Router, Link } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Router, Link } from 'react-router-dom'
 import './App.css';
+//import login
 
 function App() {
   // const [count, setCount] = useState(0)
@@ -9,10 +10,11 @@ function App() {
   return (
     <>
     <BrowserRouter>
-      <Router>
+      <Routes>
       <Route path='/' element={<Home />}/>
-      <Route path='/totalSum' element={}/>
-      </Router>
+      {/* <Route path='/totalSum' element={}/> */}
+      {/* <Route path='/login' element={<Login />}/> */}
+      </Routes>
     </BrowserRouter>
     </>
   );

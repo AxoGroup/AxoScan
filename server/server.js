@@ -1,14 +1,21 @@
 import express from 'express';
 import path from 'path';
+import cookieParser from 'cookie-parser'
 const app = express();
 // eslint-disable-next-line no-unused-vars
 const PORT = 3000;
+
+//import controller
+import userController from './controllers/userController.js'
 
 // delcare routers
 import uploadRouter from './routes/authRoutes.js';
 
 // handle parsing request body
 app.use(express.json());
+app.use(express.urlencoded({exnteded: true})); 
+
+app.use(cookieParser()); //allows server to add broswer cookies to req.cookies object
 
 // favicon error handler
 app.get('/favicon.ico', (req, res) => res.status(204));
@@ -22,6 +29,14 @@ app.get('/', (req, res) => {
 
 // route handlers
 app.use('/api', uploadRouter);
+
+//login
+app.post('/api/login'), userController.loginUser, (req, res) => {
+  res.status(200).json({
+    success: true, 
+    ...res.locals.user
+  }); 
+}
 
   //catch-all route handler for any requests to an unknown route
 app.use('*', (req, res) => res.sendStatus(404));
