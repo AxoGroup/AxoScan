@@ -1,7 +1,7 @@
 import fetch from 'node-fetch';
 import FormData from 'form-data';
 import { Receipt } from '../models/models.js';
-import process from 'process';
+// import process from 'process';
 
 const receiptController = {
   // controller object for receipt data handling
@@ -18,7 +18,7 @@ const receiptController = {
       const options = {
         // options for the fetch request
         method: 'POST',
-        headers: { accept: 'application/json', apikey: process.env.VITE_TAGGUN_API_KEY },
+        headers: { accept: 'application/json', apikey: '65d90c50f6b911ee9433edbb2578dfab' },
       };
 
       options.body = form; // attach the form data to the options object
