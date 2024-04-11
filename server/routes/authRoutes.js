@@ -17,6 +17,10 @@ router.use(
   })
 );
 
+router.get('/totalSum', receiptController.totalSum, (req, res) => {
+  res.status(200).json(res.locals.totalSum);
+})
+
 // post request
 router.post('/upload', upload.single('file'), memorize, receiptController.uploadReceipt, searchArray.searched, receiptController.saveReceipt, (req, res) => res.status(200).json(res.locals.array));
 
