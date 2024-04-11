@@ -8,7 +8,12 @@
   flex-direction: column;
   align-items: center;
   border: .2em solid #000102;
-  padding-bottom: .2em
+  padding-bottom: .2em;
+  padding-right: .4em;
+  padding-left: .4em;
+  border-style: ridge;
+  border-width: thick;
+  background-color: rgba(90, 91, 134, 0.983)
 }
 
 .signup-form-container {

@@ -4,6 +4,8 @@ import Home from './components/Home.jsx';
 import Login from './components/Login.jsx';
 import './App.css';
 import Signup from './components/Signup.jsx';
+import { Toaster } from 'react-hot-toast'
+import Profile from './components/Profile.jsx';
 
 const isAuthenticated = () => {
   return localStorage.getItem('userToken') ? true : false;
@@ -13,13 +15,17 @@ function App() {
   // const [count, setCount] = useState(0)
 
   return (
-    <Router>
-      <Routes>
-        <Route path='/login' element={<Login />} />
-        <Route path='/signup' element={<Signup />} />
-        <Route path='/' element={isAuthenticated() ? <Home /> : <Navigate replace to='/login' />} />
-      </Routes>
-    </Router>
+    <>
+      <Toaster position='bottom-right' toastOptions={{ duration: 2000 }} stack={10} />
+      <Router>
+        <Routes>
+          <Route path='/login' element={<Login />} />
+          <Route path='/signup' element={<Signup />} />
+          <Route path='/profile' element={<Profile />} />
+          <Route path='/' element={isAuthenticated() ? <Home /> : <Navigate replace to='/login' />} />
+        </Routes>
+      </Router>
+    </>
   );
 }
 
