@@ -1,5 +1,6 @@
 import fetch from 'node-fetch';
 import FormData from 'form-data';
+import gptCategorize from '../openai-test.js';
 import Receipt from '../models/models.js';
 import User from '../models/userModel.js';
 
@@ -50,6 +51,31 @@ const receiptController = {
     }
   },
 
+  async categorize(req, res, next) {
+    try {
+      const userId = req.body.userId //replace with static user_id
+      const user = await User.findById(userId);
+
+      const lineItems = res.locals.array;
+      for (let i = 0; i < lineItems.length; i++) {
+        const currentItem = lineItems[i];
+        const type = currentItem.type;
+        const value = currentItem.value;
+
+        const category = gptCategorize(type);
+        if (!user.categoryTotals[category]) {
+          user.categoryTotals[category] = value 
+        } else {
+          user.categoryTotals[category] = user.categoryTotals[category] + value;
+        }
+      }
+
+      return next();
+    } catch (error) {
+      return next({log: 'error in categorize', message: {error: 'error in categorize'}})
+    }
+  },
+
   async totalSum(req, res, next) {
     try {
       const userId = req.body.userId //replace with static user_id
@@ -58,6 +84,7 @@ const receiptController = {
       const total = user.receipts.reduce((total, currentReceipt) => total + currentReceipt.total, 0)
 
       res.locals.totalSum = total;
+      res.locals.totalByCategory = user.categoryTotals;
       return next();
       
     } catch (err) {
