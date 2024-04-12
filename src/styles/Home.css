@@ -7,8 +7,19 @@
   width: 100%;
 }
 
+.header-container {
+  display: flex;
+  align-items: center;
+  position: relative;
+  width: 100%;
+  justify-content: space-between;
+  height: 80px;
+}
+
 .header {
   align-self: flex-start;
+  flex-grow: 1;
+  z-index: 1;
 }
 
 .progress-container {
@@ -22,3 +33,20 @@
   left: 0;
   width: 100%;
 }
+
+
+
+.alr-reg-btn2 {
+  margin-top: .25em;
+  margin-bottom: .25em;
+  background-color: '#272727';
+  color: 'white';
+  border: .2em solid #000102; /* No border */
+  border-radius: 5px;
+  padding: 10px 10px;
+  font-weight: bold;
+  position: absolute;
+  z-index: 2;
+  height: 100%;
+}
+

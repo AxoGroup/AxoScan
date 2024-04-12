@@ -7,14 +7,20 @@ import Footer from './Footer';
 import UploadButton from './UploadButton';
 import Pie from './Pie';
 import ProgressBar from './ProgressBar';
+import { useNavigate } from 'react-router-dom';
 
 export default function Home() {
   const [hasUploaded, setHasUploaded] = useState(false);
   const [lineItems, setLineItems] = useState([]);
   const total = lineItems.reduce((acc, curr) => acc + curr.value, 0);
+  const navigate = useNavigate();
   return (
     <div className="home-container">
-      <TitleHeader className="header" />
+      <div className="header-container">
+        <button type="button" className="alr-reg-btn2" onClick={() => navigate('/profile')}>Profile</button>
+        <TitleHeader className="header" />
+      </div>
+      
 
       {hasUploaded ? (
         <>
