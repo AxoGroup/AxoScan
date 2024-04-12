@@ -1,21 +1,23 @@
 import React from 'react';
-import { Card } from 'antd';
 import { GithubOutlined } from '@ant-design/icons';
+import { v4 as uuidv4 } from 'uuid';
 import '../styles/Footer.css';
+import PropTypes from 'prop-types';
 
-export default function Footer() {
-  const names = ['Sofia', 'Aiden', 'Austin', 'Sean', 'Dylan'];
+
+const Footer = ()=> {
+  const names = ['Chris', 'Ellis', 'Logan', 'Sean', 'Stephen'];
   const urls = [
-    'https://github.com/orgs/AxoGroup/people/sarhiri',
-    'https://github.com/orgs/AxoGroup/people/AidenCarere',
-    'https://github.com/orgs/AxoGroup/people/InvectivusTaco',
-    'https://github.com/orgs/AxoGroup/people/sfryan95',
-    'https://github.com/orgs/AxoGroup/people/dsterling7',
+    'https://github.com/chrisr0892',
+    'https://github.com/elsong86',
+    'https://github.com/ljn16',
+    'https://github.com/sfryan95',
+    'https://github.com/stephenhyang',
   ];
   const res = [];
 
   for (let i = 0; i < names.length; i++) {
-    res.push(<Box key={crypto.randomUUID()} name={names[i]} url={urls[i]} />);
+    res.push(<Box key={uuidv4()} name={names[i]} url={urls[i]} />);
   }
   return (
     <div id="footer">
@@ -36,3 +38,11 @@ const Box = ({ name, url }) => {
     </div>
   );
 };
+
+//Enforce prop types
+Box.propTypes = {
+  name: PropTypes.string.isRequired,
+  url: PropTypes.string.isRequired,
+};
+
+export default Footer;

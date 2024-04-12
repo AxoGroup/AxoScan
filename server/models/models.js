@@ -1,26 +1,43 @@
 import mongoose from 'mongoose';
 
-const MONGO_URI = 'mongodb+srv://InvectivusTaco:SomethingNewDontStealMyAccounts@cluster0.upscirl.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0'
+const MONGO_URI = 'mongodb+srv://loganjnelsen:nL2cBABYu9iJjHvT@axoscan.iegl9s6.mongodb.net/?retryWrites=true&w=majority&appName=AxoScan';
 
-mongoose.connect(MONGO_URI, {
-  // options for the connect method to parse the URI
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  // sets the name of the DB that our collections are part of
-  dbName: 'receipts'
-})
-    .then(() => console.log('Connected to Mongo DB.'))
-    .catch(err => console.log(err));
+mongoose
+  .connect(MONGO_URI, {
+    // options for the connect method to parse the URI
+    // useNewUrlParser: true,
+    // useUnifiedTopology: true,
+    // sets the name of the DB that our collections are part of
+    dbName: 'axoScan',
+  })
+  .then(() => console.log('Connected to Mongo DB.'))
+  .catch((err) => console.log(err));
 
 const Schema = mongoose.Schema;
 
+const receiptItemSchema = new Schema(
+  {
+    type: String,
+    value: { type: Number, required: true },
+  },
+  { _id: false }
+);
+
 const receiptSchema = new Schema({
-  fileName: {type: String, require: true},
-  receipt: {type: Array, require: true},
-    //date: new Date() 
+  fileName: { type: String, required: true },
+  category: { type: String, required: true },
+  total: { type: Number, required: true },
+  userId: { type: Schema.Types.ObjectId, ref: 'User', required: true },
+});
+
+// [{ type: String, value: Number }]
+
+const userSchema = new Schema({
+  email: { type: String, required: true, unique: true },
+  password: { type: String, required: true },
 });
 
 const Receipt = mongoose.model('receipt', receiptSchema);
+const User = mongoose.model('user', userSchema);
 
-export default Receipt;
-
+export { Receipt, User };

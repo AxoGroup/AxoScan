@@ -5,6 +5,7 @@ import '../styles/DragAndDrop.css';
 import axios from 'axios';
 const { Dragger } = Upload;
 import ProgressBar from './ProgressBar';
+import React from 'react';
 
 const DragAndDrop = ({ setHasUploaded, setLineItems }) => {
   const [fileList, setFileList] = useState([]);
@@ -32,8 +33,11 @@ const DragAndDrop = ({ setHasUploaded, setLineItems }) => {
     };
 
     let progressInterval = setInterval(updateProgress, 1000);
-
+    const token = localStorage.getItem('token');
     const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
       onUploadProgress: (progressEvent) => {
         let percentage = (progressEvent.loaded * 100) / progressEvent.total;
         setProgress(percentage);
@@ -42,7 +46,7 @@ const DragAndDrop = ({ setHasUploaded, setLineItems }) => {
 
     // update url from backend
     try {
-      const response = await axios.post('/api/upload', formData, config);
+      const response = await axios.post('http://localhost:3000/api/upload', formData, config);
       clearInterval(progressInterval);
       setProgress(100);
       message.success(`${file.name}, file uploaded successfully`);
@@ -66,7 +70,7 @@ const DragAndDrop = ({ setHasUploaded, setLineItems }) => {
 
   return (
     <>
-      <Dragger name="file" multiple={false} fileList={fileList} onChange={handleChange} customRequest={customRequest} onRemove={() => setFileList([])} id="drag-and-drop">
+      <Dragger name="file" data-testid="drag-and-drop" multiple={true} fileList={fileList} onChange={handleChange} customRequest={customRequest} onRemove={() => setFileList([])} id="drag-and-drop">
         <p className="ant-upload-drag-icon">
           <InboxOutlined style={{ color: '#f19cbb' }} />
         </p>
