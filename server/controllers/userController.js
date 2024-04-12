@@ -1,8 +1,9 @@
-import User from '../models/userModel';
+import User from '../models/userModel.js';
 
 const userController = {};
 
 userController.loginUser = async (req, res, next) => {
+    console.log('here');
     const {username, password} = req.body;
 
     if(!username || !password){
@@ -13,10 +14,14 @@ userController.loginUser = async (req, res, next) => {
         })
     }
     try {
-        const user = await User.findOne(req.body)
-        res.locals.user = user; 
-        next(); 
+        if(await User.findOne(req.body)) { 
+            return next()}
+        else {
+            return next({log: 'wrong'})
+        }
     } catch (error) {
         throw new Error('Username/password not found')
     }
 }
+
+export default userController;

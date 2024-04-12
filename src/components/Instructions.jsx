@@ -13,7 +13,7 @@ const App = () => (
         border: 'none',
         color: 'rgba(255, 255, 255, 0.45)',
       }}
-      headStyle={{ borderBottom: '1px solid #93d5a2', color: 'rgba(255, 255, 255, 0.65)' }}>
+      styles={{ borderBottom: '1px solid #93d5a2', color: 'rgba(255, 255, 255, 0.65)' }}>
       <p>Welcome to our streamlined upload process! To ensure your files are uploaded seamlessly, simply drag and drop them into the area below. </p>
     </Card>
   </Space>

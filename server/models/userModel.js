@@ -16,7 +16,8 @@ const Schema = mongoose.Schema;
 const userSchema = new Schema({
   username: {type: String, require: true},
   password: {type: String, require: true},
-  receipts: {type: Array, require: true}
+  receipts: {type: Array, require: true},
+  categoryTotals: {type: Object, require: true}
 });
 
 const User = mongoose.model('user', userSchema);
